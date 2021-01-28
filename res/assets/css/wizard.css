@@ -1,0 +1,181 @@
+.form-outer{
+    width: 100%;
+    overflow: hidden;
+}
+
+.form-outer form{
+    display: flex;
+    width: 400%;
+}
+
+.form-outer form .page{
+    width: 25%;
+    transition: margin-left 0.3s ease-in-out;
+}
+
+.form-outer form .page .title{
+    text-align: left;
+    font-size: 25px;
+    font-weight: 500;
+}
+.form-outer form .page .field{
+    height: 45px;
+    width: 100%;
+    margin: 45px 0;
+    display: flex;
+    position: relative;
+}
+.form-outer form .page .field .label{
+    position: absolute;
+    top: -30px;
+    font-weight: 500;
+}
+form .page .field select{
+    width: 100%;
+    padding-left: 10px;
+    font-size: 17px;
+    font-weight: 500;
+}
+.form-outer form .page .field input{
+    height: 100%;
+    width: 100%;
+    border: 1px solid lightgray;
+    border-radius: 5px;
+    font-size: 18px;
+    padding-left: 15px;
+}
+
+
+.form-outer form .page .field button{
+    width: 100%;
+    height: calc(100% + 5px);
+    margin-top: -20px;
+    border: none;
+    background: #1367d5;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 500;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.form-outer form .page .field button:hover{
+    background: #042f66;
+}
+
+.form-outer form .page .field .btns button{
+    margin-top: -20px !important;
+
+}
+
+
+form .page .btns button.prev{
+    margin-right: 3px;
+    font-size: 17px;
+}
+form .page .btns button.next{
+    margin-left: 3px;
+    font-size: 17px;
+}
+
+.progress__bar{
+    display: flex;
+    margin: 40px 0;
+    position: relative;
+}
+
+.progress__bar .step{
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.progress__bar .step p {
+    font-size: 18px;
+    font-weight: 500;
+    color: #111;
+    margin-bottom: 8px;
+    transition: 0.2s;
+}
+
+.progress__bar .step p.active {
+    color: #1367d5; 
+}
+
+.progress__bar .step .bullet {
+    position: relative;
+    height:  25px;
+    width: 25px;
+    border: 2px solid #000;
+    display: inline-block;
+    border-radius: 50%;
+    transition: 0.3s;
+}
+.progress__bar .step .bullet.active {
+    border-color: #042f66;
+    background: #1367d5;
+}
+
+.progress__bar .step:first-child::before,
+.progress__bar .step:last-child::after{
+display: none;
+}
+
+.progress__bar .step::before{
+    content: "";
+    position: absolute;
+    top: 70%;
+    left: 0px;
+    width: calc(50% - 12px);
+    height: 3px;
+    background: #111;
+}
+.progress__bar .step::after{
+    content: "";
+    position: absolute;
+    top: 70%;
+    right: 0px;
+    width: calc(50% - 12px);
+    height: 3px;
+    background: #111;
+}
+
+.progress__bar .step.active .bullet::after{
+    background-color: #1367d5;
+    transform: scaleX(0);
+    transform-origin: left;
+    animation: animate 0.3s linear forwards;
+}
+
+@keyframes animate{
+    100%{
+        transform: scaleX(1);
+    }
+}
+.progress__bar .step .bullet span {
+    font-weight: 500;
+    font-size: 17px;
+    line-height: 25px;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.progress__bar .step .bullet.active span {
+    display: none;
+}
+.progress__bar .step .check{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    font-size: 15px;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+.progress__bar .step .check.active{
+    display: block;
+    color: #fff;
+}
