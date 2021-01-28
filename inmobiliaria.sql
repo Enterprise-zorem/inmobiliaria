@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 28-01-2021 a las 20:10:29
+-- Tiempo de generación: 28-01-2021 a las 22:32:04
 -- Versión del servidor: 10.4.14-MariaDB
 -- Versión de PHP: 7.4.11
 
@@ -31,11 +31,25 @@ CREATE TABLE `caracteristica` (
   `pk_caracteristica` int(11) NOT NULL,
   `name` varchar(50) NOT NULL,
   `tipo` enum('proyecto','propiedad') DEFAULT NULL,
-  `fk_categoria` int(11) DEFAULT NULL,
   `fk_tipo` int(11) DEFAULT NULL,
   `created_at` datetime DEFAULT NULL,
-  `updated_at` datetime DEFAULT NULL
+  `updated_at` datetime DEFAULT NULL,
+  `fk_interes` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `caracteristica`
+--
+
+INSERT INTO `caracteristica` (`pk_caracteristica`, `name`, `tipo`, `fk_tipo`, `created_at`, `updated_at`, `fk_interes`) VALUES
+(13, 'Acceso para Deficientes ', 'proyecto', 6, '2021-01-28 14:54:44', '2021-01-28 14:54:44', 8),
+(14, 'Aire acondicionado ', 'propiedad', 6, '2021-01-28 14:55:19', '2021-01-28 14:55:19', 8),
+(15, 'Cafetería ', 'proyecto', 6, '2021-01-28 14:56:04', '2021-01-28 14:56:04', 9),
+(16, 'Calle Pavimentada', 'proyecto', 8, '2021-01-28 14:56:47', '2021-01-28 14:56:47', 9),
+(17, 'Campo de Futbol ', 'proyecto', 8, '2021-01-28 14:57:32', '2021-01-28 14:57:32', 8),
+(19, 'Campo de Golf', 'proyecto', 6, '2021-01-28 14:58:06', '2021-01-28 14:58:06', 8),
+(20, 'Piscina', 'proyecto', 5, '2021-01-28 14:58:27', '2021-01-28 14:58:27', 10),
+(21, 'Cancha Polideportiva', 'proyecto', 5, '2021-01-28 14:58:48', '2021-01-28 14:58:48', 10);
 
 -- --------------------------------------------------------
 
@@ -56,10 +70,15 @@ CREATE TABLE `categoria` (
 --
 
 INSERT INTO `categoria` (`pk_categoria`, `name`, `fk_tipo`, `created_at`, `updated_at`) VALUES
-(17, 'categoria1', '[\"9\",\"6\"]', '2021-01-27 15:54:59', '2021-01-27 15:54:59'),
-(18, 'categoria 32', '[\"9\",\"8\",\"7\"]', '2021-01-27 16:21:54', '2021-01-28 10:53:37'),
-(19, 'prueba 2', '[\"9\"]', '2021-01-28 09:30:15', '2021-01-28 09:30:25'),
-(20, 'prueba4', '[\"9\",\"8\"]', '2021-01-28 09:33:31', '2021-01-28 09:34:15');
+(21, 'Área', '[\"9\"]', '2021-01-28 14:41:08', '2021-01-28 14:41:08'),
+(22, 'Bodega', '[\"7\"]', '2021-01-28 14:41:28', '2021-01-28 14:41:28'),
+(23, 'Casa', '[\"7\",\"6\"]', '2021-01-28 14:41:43', '2021-01-28 14:41:43'),
+(24, 'Casa de Playa', '[\"6\"]', '2021-01-28 14:41:59', '2021-01-28 14:41:59'),
+(25, 'Casa en Condominio', '[\"6\"]', '2021-01-28 14:42:22', '2021-01-28 14:42:22'),
+(26, 'Departamento', '[\"5\"]', '2021-01-28 14:42:36', '2021-01-28 14:42:36'),
+(27, 'Garaje Estacionamiento ', '[\"7\"]', '2021-01-28 14:42:57', '2021-01-28 14:42:57'),
+(28, 'Hacienda ', '[\"8\"]', '2021-01-28 14:43:10', '2021-01-28 14:43:10'),
+(29, 'Hotel', '[\"7\"]', '2021-01-28 14:43:25', '2021-01-28 14:43:25');
 
 -- --------------------------------------------------------
 
@@ -73,14 +92,25 @@ CREATE TABLE `contacto` (
   `apellidos` varchar(50) NOT NULL,
   `identificacion` varchar(15) DEFAULT NULL,
   `tipo_identificacion` varchar(15) DEFAULT NULL,
-  `tipo_contacto` enum('fisica','juridica') DEFAULT NULL,
+  `tipo_contacto` enum('natural','juridica') DEFAULT NULL,
   `telefonos` varchar(200) DEFAULT '[]',
   `correos` varchar(200) DEFAULT '[]',
   `direcciones` text DEFAULT '[]',
   `fk_tipo_contacto` varchar(200) DEFAULT '[]',
   `estado_civil` varchar(30) DEFAULT NULL,
-  `parent` int(11) DEFAULT 0
+  `parent` int(11) DEFAULT 0,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `contacto`
+--
+
+INSERT INTO `contacto` (`pk_contacto`, `nombres`, `apellidos`, `identificacion`, `tipo_identificacion`, `tipo_contacto`, `telefonos`, `correos`, `direcciones`, `fk_tipo_contacto`, `estado_civil`, `parent`, `created_at`, `updated_at`) VALUES
+(1, 'asd', '', '', '', '', '', '', '', '[\"6\"]', '', 0, '2021-01-28 15:51:58', '2021-01-28 15:51:58'),
+(2, 'contacto2', '', '', '', '', '', '', '', '[\"5\"]', '', 0, '2021-01-28 15:57:01', '2021-01-28 15:57:01'),
+(3, 'contacto5', '', '', '', '', '', '', '', '[\"4\"]', '', 0, '2021-01-28 15:58:19', '2021-01-28 16:00:06');
 
 -- --------------------------------------------------------
 
@@ -151,9 +181,10 @@ CREATE TABLE `interes` (
 --
 
 INSERT INTO `interes` (`pk_interes`, `name`, `created_at`, `updated_at`) VALUES
-(5, 'distancia hasta la playa', '2021-01-27 15:58:49', '2021-01-27 15:58:49'),
-(6, 'Distancia hasta el centro', '2021-01-27 15:58:54', '2021-01-27 15:58:54'),
-(7, 'Distancia hasta el aeropuerto', '2021-01-27 15:58:59', '2021-01-27 15:58:59');
+(8, 'Instalación ', '2021-01-28 14:50:37', '2021-01-28 14:50:37'),
+(9, 'Acabado ', '2021-01-28 14:50:47', '2021-01-28 14:50:47'),
+(10, 'Recreación y Descanso ', '2021-01-28 14:51:04', '2021-01-28 14:51:04'),
+(11, 'Diferencial ', '2021-01-28 14:51:11', '2021-01-28 14:51:11');
 
 -- --------------------------------------------------------
 
@@ -203,15 +234,17 @@ CREATE TABLE `proyecto` (
   `lat` text DEFAULT NULL,
   `lon` text DEFAULT NULL,
   `fk_tipo` int(11) DEFAULT NULL,
-  `direccion` varchar(100) DEFAULT NULL
+  `direccion` varchar(100) DEFAULT NULL,
+  `created_at` datetime DEFAULT NULL,
+  `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Volcado de datos para la tabla `proyecto`
 --
 
-INSERT INTO `proyecto` (`pk_proyecto`, `name`, `descripcion`, `area_total`, `area_construida`, `fk_fase`, `fk_caracteristica`, `fk_provincia`, `fk_departamento`, `fk_distrito`, `lat`, `lon`, `fk_tipo`, `direccion`) VALUES
-(1, 'PROYECTO 01', 'ESTO ES UN DESCRIPCION', NULL, NULL, NULL, '[]', 1, 1, 1, '-14.06772472401731', '-75.70529392140543\r\n', NULL, 'Calle el delirio. Urbanización jardines del río.');
+INSERT INTO `proyecto` (`pk_proyecto`, `name`, `descripcion`, `area_total`, `area_construida`, `fk_fase`, `fk_caracteristica`, `fk_provincia`, `fk_departamento`, `fk_distrito`, `lat`, `lon`, `fk_tipo`, `direccion`, `created_at`, `updated_at`) VALUES
+(1, 'PROYECTO 01', 'ESTO ES UN DESCRIPCION', NULL, NULL, NULL, '[]', 1, 1, 1, '-14.06772472401731', '-75.70529392140543\r\n', NULL, 'Calle el delirio. Urbanización jardines del río.', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -273,6 +306,15 @@ CREATE TABLE `tipo_contacto` (
   `created_at` datetime DEFAULT NULL,
   `updated_at` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Volcado de datos para la tabla `tipo_contacto`
+--
+
+INSERT INTO `tipo_contacto` (`pk_tipo_contacto`, `name`, `created_at`, `updated_at`) VALUES
+(4, 'cliente', '2021-01-28 15:10:28', '2021-01-28 15:10:28'),
+(5, 'usuario', '2021-01-28 15:10:36', '2021-01-28 15:10:36'),
+(6, 'administrador', '2021-01-28 15:10:46', '2021-01-28 15:10:46');
 
 -- --------------------------------------------------------
 
@@ -2524,7 +2566,22 @@ INSERT INTO `vista` (`pk_vista`, `vista`, `tipo`) VALUES
 (76, 'action/proyecto/insert', 'proceso'),
 (77, 'view/localizador/', 'vista'),
 (78, 'action/localizador/stores', 'proceso'),
-(79, 'action/localizador/data', 'proceso');
+(79, 'action/localizador/data', 'proceso'),
+(80, 'view/tipo-contacto/', 'vista'),
+(81, 'view/tipoContacto/', 'vista'),
+(82, 'action/tipoContacto/vistas/insert', 'proceso'),
+(83, 'action/tipoContacto/insert', 'proceso'),
+(84, 'action/tipoContacto/vistas/list', 'proceso'),
+(85, 'action/tipoContacto/vistas/update', 'proceso'),
+(86, 'action/tipoContacto/edit', 'proceso'),
+(87, 'action/tipoContacto/delete', 'proceso'),
+(88, 'view/contacto/', 'vista'),
+(89, 'action/proyecto/provincia', 'proceso'),
+(90, 'action/contacto/insert', 'proceso'),
+(91, 'action/contacto/vistas/list', 'proceso'),
+(92, 'action/proyecto/distrito', 'proceso'),
+(93, 'action/contacto/vistas/update', 'proceso'),
+(94, 'action/contacto/update', 'proceso');
 
 --
 -- Índices para tablas volcadas
@@ -2640,19 +2697,19 @@ ALTER TABLE `vista`
 -- AUTO_INCREMENT de la tabla `caracteristica`
 --
 ALTER TABLE `caracteristica`
-  MODIFY `pk_caracteristica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `pk_caracteristica` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `categoria`
 --
 ALTER TABLE `categoria`
-  MODIFY `pk_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `pk_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT de la tabla `contacto`
 --
 ALTER TABLE `contacto`
-  MODIFY `pk_contacto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pk_contacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `estatus`
@@ -2670,7 +2727,7 @@ ALTER TABLE `fase`
 -- AUTO_INCREMENT de la tabla `interes`
 --
 ALTER TABLE `interes`
-  MODIFY `pk_interes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `pk_interes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `propiedad`
@@ -2700,7 +2757,7 @@ ALTER TABLE `tipo`
 -- AUTO_INCREMENT de la tabla `tipo_contacto`
 --
 ALTER TABLE `tipo_contacto`
-  MODIFY `pk_tipo_contacto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `pk_tipo_contacto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `transaccion`
@@ -2718,7 +2775,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `vista`
 --
 ALTER TABLE `vista`
-  MODIFY `pk_vista` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `pk_vista` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=95;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
